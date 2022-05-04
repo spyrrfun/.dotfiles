@@ -22,4 +22,11 @@ function get_exploit() {
 export TIME_ZONE='Asia/Seoul'
 export POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
+alias ls='lsd'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -al'
 alias lspy='ls -l ~/.py'
+alias glow='~/tools/glow/glow --pager'
+
+export GPG_TTY=$(tty)
