@@ -3,11 +3,10 @@
 
 set -e
 
-ZSH=${ZSH:-~/.dotfiles}
-REPO=${REPO:-spyrr/.dotfiles}
-REMOTE=${REMOTE:-https://github.com/${REPO}.git}
-BRANCH=${BRANCH:-master}
-
+DOTFILES=$HOME/.dotfiles
+REPO=spyrrfun/.dotfiles
+REMOTE=https://github.com/${REPO}.git
+BRANCH=master
 
 command_exists() {
 	command -v "$@" > /dev/null 2>&1
@@ -19,16 +18,17 @@ command_exists git || {
 	exist 1
 }
 
-git clone --branch "$BRANCH" "$REMOTE" "$ZSH" ||  {
+git clone --branch "$BRANCH" "$REMOTE" "$DOTFILES" ||  {
 	error "git clone of dotfiles repo of spyrr, failed"
 	exit 1
 }
 
-ln -s ${ZSH}/tmux.conf ~/.tmux.conf
-ln -s ${ZSH}/vimrc ~/.vimrc
+ln -s ${DOTFILES}/tmux.conf ~/.tmux.conf
+#ln -s ${DOTFILES}/vimrc ~/.vimrc
+ln -s ${DOTFILES}/nvim ${HOME}/.config/nvim
 
-TARGET=${TARGET:-~/.zshrc}
-[ -f ${TARGET} ] && echo "\nsource ${ZSH}/zshrc" >> ${TARGET} || {
+TARGET=$HOME/.zshrc
+[ -f ${TARGET} ] && echo "\nsource ${DOTFILES}/zshrc" >> ${TARGET} || {
 	error "zshrc does not exist"
 	exit 1
 }
